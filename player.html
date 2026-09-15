@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>スパイク動画再生</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container wide">
+    <h1>Ki-Log</h1>
+    <p>検出スパイク数：{{ session.spike_count }}</p>
+
+    <div class="compare-grid">
+      <section class="video-panel" data-side="a">
+        <h2 class="panel-label">動画A</h2>
+        <div class="field-row">
+          <label class="field">
+            選手：
+            <select class="player-select"></select>
+          </label>
+          <label class="field">
+            回数：
+            <select class="count-select"></select>
+          </label>
+        </div>
+        <div class="video-wrap">
+          <video class="video-player" controls preload="metadata"></video>
+        </div>
+      </section>
+
+      <section class="video-panel" data-side="b">
+        <h2 class="panel-label">動画B</h2>
+        <div class="field-row">
+          <label class="field">
+            選手：
+            <select class="player-select"></select>
+          </label>
+          <label class="field">
+            回数：
+            <select class="count-select"></select>
+          </label>
+        </div>
+        <div class="video-wrap">
+          <video class="video-player" controls preload="metadata"></video>
+        </div>
+      </section>
+    </div>
+
+    <div class="sync-row">
+      <button id="sync-play-btn" type="button">▶ 同時再生（A・Bを先頭から同時に再生）</button>
+    </div>
+
+    <div class="compare-grid nav-grid">
+      <div class="nav-buttons" data-side="a">
+        <button class="prev-btn" type="button">← 前のスパイク</button>
+        <button class="next-btn" type="button">次のスパイク →</button>
+      </div>
+      <div class="nav-buttons" data-side="b">
+        <button class="prev-btn" type="button">← 前のスパイク</button>
+        <button class="next-btn" type="button">次のスパイク →</button>
+      </div>
+    </div>
+
+    <p><a href="{{ url_for('index') }}">← 別の動画をアップロード</a></p>
+  </main>
+
+  <script id="spike-data" type="application/json">
+    {
+      "sessionId": {{ session.id }},
+      "players": {{ players | tojson }},
+      "spikes": {{ spikes | tojson }}
+    }
+  </script>
+  <script src="{{ url_for('static', filename='player.js') }}"></script>
+</body>
+</html>

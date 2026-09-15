@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>解析中 - スパイク動画解析</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <h1>スパイク動画解析</h1>
+    <div id="status-box" data-session-id="{{ session.id }}">
+      <p id="status-message">解析中...</p>
+      <p id="progress-message"></p>
+    </div>
+    <p><a href="{{ url_for('index') }}">← 別の動画をアップロード</a></p>
+  </main>
+  <script src="{{ url_for('static', filename='status.js') }}"></script>
+</body>
+</html>
